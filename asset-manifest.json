@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/LaunchNotes/static/css/main.5f361e03.chunk.css",
+    "main.js": "/LaunchNotes/static/js/main.5b9bad10.chunk.js",
+    "main.js.map": "/LaunchNotes/static/js/main.5b9bad10.chunk.js.map",
+    "runtime-main.js": "/LaunchNotes/static/js/runtime-main.0c943f27.js",
+    "runtime-main.js.map": "/LaunchNotes/static/js/runtime-main.0c943f27.js.map",
+    "static/js/2.071e8f0a.chunk.js": "/LaunchNotes/static/js/2.071e8f0a.chunk.js",
+    "static/js/2.071e8f0a.chunk.js.map": "/LaunchNotes/static/js/2.071e8f0a.chunk.js.map",
+    "index.html": "/LaunchNotes/index.html",
+    "precache-manifest.41764252bdd70deef37574e861199811.js": "/LaunchNotes/precache-manifest.41764252bdd70deef37574e861199811.js",
+    "service-worker.js": "/LaunchNotes/service-worker.js",
+    "static/css/main.5f361e03.chunk.css.map": "/LaunchNotes/static/css/main.5f361e03.chunk.css.map",
+    "static/js/2.071e8f0a.chunk.js.LICENSE.txt": "/LaunchNotes/static/js/2.071e8f0a.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/LaunchNotes/static/media/logo.5d5d9eef.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0c943f27.js",
+    "static/js/2.071e8f0a.chunk.js",
+    "static/css/main.5f361e03.chunk.css",
+    "static/js/main.5b9bad10.chunk.js"
+  ]
+}
