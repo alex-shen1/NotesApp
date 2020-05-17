@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/LaunchNotes/static/css/main.5f361e03.chunk.css",
-    "main.js": "/LaunchNotes/static/js/main.5b9bad10.chunk.js",
-    "main.js.map": "/LaunchNotes/static/js/main.5b9bad10.chunk.js.map",
-    "runtime-main.js": "/LaunchNotes/static/js/runtime-main.0c943f27.js",
-    "runtime-main.js.map": "/LaunchNotes/static/js/runtime-main.0c943f27.js.map",
-    "static/js/2.071e8f0a.chunk.js": "/LaunchNotes/static/js/2.071e8f0a.chunk.js",
-    "static/js/2.071e8f0a.chunk.js.map": "/LaunchNotes/static/js/2.071e8f0a.chunk.js.map",
-    "index.html": "/LaunchNotes/index.html",
-    "precache-manifest.41764252bdd70deef37574e861199811.js": "/LaunchNotes/precache-manifest.41764252bdd70deef37574e861199811.js",
-    "service-worker.js": "/LaunchNotes/service-worker.js",
-    "static/css/main.5f361e03.chunk.css.map": "/LaunchNotes/static/css/main.5f361e03.chunk.css.map",
-    "static/js/2.071e8f0a.chunk.js.LICENSE.txt": "/LaunchNotes/static/js/2.071e8f0a.chunk.js.LICENSE.txt",
-    "static/media/logo.svg": "/LaunchNotes/static/media/logo.5d5d9eef.svg"
+    "main.css": "/NotesApp/static/css/main.523f09c5.chunk.css",
+    "main.js": "/NotesApp/static/js/main.7fba4053.chunk.js",
+    "main.js.map": "/NotesApp/static/js/main.7fba4053.chunk.js.map",
+    "runtime-main.js": "/NotesApp/static/js/runtime-main.405f5f57.js",
+    "runtime-main.js.map": "/NotesApp/static/js/runtime-main.405f5f57.js.map",
+    "static/js/2.071e8f0a.chunk.js": "/NotesApp/static/js/2.071e8f0a.chunk.js",
+    "static/js/2.071e8f0a.chunk.js.map": "/NotesApp/static/js/2.071e8f0a.chunk.js.map",
+    "index.html": "/NotesApp/index.html",
+    "precache-manifest.c53bdd912f836c938061aeb1e5422547.js": "/NotesApp/precache-manifest.c53bdd912f836c938061aeb1e5422547.js",
+    "service-worker.js": "/NotesApp/service-worker.js",
+    "static/css/main.523f09c5.chunk.css.map": "/NotesApp/static/css/main.523f09c5.chunk.css.map",
+    "static/js/2.071e8f0a.chunk.js.LICENSE.txt": "/NotesApp/static/js/2.071e8f0a.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/NotesApp/static/media/logo.ee7cd8ed.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.0c943f27.js",
+    "static/js/runtime-main.405f5f57.js",
     "static/js/2.071e8f0a.chunk.js",
-    "static/css/main.5f361e03.chunk.css",
-    "static/js/main.5b9bad10.chunk.js"
+    "static/css/main.523f09c5.chunk.css",
+    "static/js/main.7fba4053.chunk.js"
   ]
 }
