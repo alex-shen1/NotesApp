@@ -60,6 +60,12 @@ class App extends Component {
     this.clearNote();
   }
 
+  deleteNote = (del_index) => {
+    let new_notes = this.state.notes; 
+    new_notes.splice(del_index, 1)
+    this.setState({notes: new_notes});
+  }
+
   render() {
     return (
       <div className="App">
@@ -72,8 +78,10 @@ class App extends Component {
           activeText={this.state.activeText}
           editNoteFunc={this.editNote}
         />
-        <NotesList notes={this.state.notes}
-          setEditingNoteFunc={this.setEditingNote}></NotesList>
+        <NotesList 
+          notes={this.state.notes}
+          setEditingNoteFunc={this.setEditingNote} 
+          deleteNoteFunc={this.deleteNote} />
       </div>
     );
   }
