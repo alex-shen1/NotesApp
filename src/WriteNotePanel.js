@@ -36,28 +36,31 @@ class WriteNotePanel extends Component {
         return <div id="addNote">
             <h1> {this.props.editing ? "Editing Note" : "Create Note"} </h1>
             <Form>
-                <Form.Group controlId="createTitle">
+                <Form.Group>
                     <Form.Label>Title</Form.Label>
-                    <Form.Control type="textarea"
+                    <Form.Control
+                        type="textarea"
                         placeholder="Title"
                         onChange={this.props.setActiveTitleFunc}
                         value={this.props.activeTitle} />
                 </Form.Group>
-                <Form.Group controlId="setText">
+                <Form.Group>
                     <Form.Label>Text</Form.Label>
-                    <Form.Control as="textarea"
+                    <Form.Control
+                        as="textarea"
                         rows="8"
                         placeholder="Text"
                         onChange={this.props.setActiveTextFunc}
                         id="noteText"
                         value={this.props.activeText} />
                 </Form.Group>
-                 
-                <Button variant="primary" 
-                onClick={ this.props.editing ? (()=>this.props.editNoteFunc()) : (()=>this.props.addNoteFunc())}>
+
+                <Button
+                    variant={this.props.editing ? "success" : "primary"}
+                    onClick={this.props.editing ? (() => this.props.editNoteFunc()) : (() => this.props.addNoteFunc())}>
                     {this.props.editing ? "Edit Note" : "Create Note"}
                 </Button>
-                
+
             </Form>
         </div>
     }

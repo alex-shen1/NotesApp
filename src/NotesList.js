@@ -12,11 +12,19 @@ class NotesList extends Component {
                             <Card>
                                 <Card.Body>
                                     <Card.Title>{note.title}
-                                        <Button variant="light"
-                                            onClick={() => this.props.setEditingNoteFunc(note.index)}>Edit</Button>
-                                        <Button variant="danger"
-                                        onClick={() => this.props.deleteNoteFunc(note.index)}>Delete</Button>
+                                        <Button
+                                            variant="light"
+                                            onClick={() => this.props.setEditingNoteFunc(note.index)}>
+                                            Edit
+                                        </Button>
+                                        <Button
+                                            variant="danger"
+                                            onClick={() => this.props.deleteNoteFunc(note.index)}>
+                                            Delete
+                                        </Button>
                                     </Card.Title>
+
+                                    <Card.Subtitle id="timestamp">{note.timestamp}</Card.Subtitle>
 
                                     <Card.Text>{note.text}</Card.Text>
                                 </Card.Body>

@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import './App.css';
 import NotesList from "./NotesList.js";
 import WriteNotePanel from "./WriteNotePanel.js";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css'; // uses "darkly" bootswatch theme
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      notes: [{ title: "placeholder title", text: "placeholder text", index: 0 }],
+      notes: [
+        // { title: "placeholder title", text: "placeholder text", index: 0, timestamp: this.nowTimeString()}
+      ],
       activeTitle: "",
       activeText: "",
       editing: false,
@@ -20,11 +22,19 @@ class App extends Component {
     this.setState({ activeTitle: "" });
     this.setState({ activeText: "" });
   }
+
+  nowTimeString = () => {
+    let now = new Date();
+
+    return ("Last edited " + now.getHours() + ":" + now.getMinutes() + " on " +
+    (now.getMonth()+1) + "/" + now.getDate() + "/" + now.getFullYear())
+  }
   addNote = () => {
     let note = {
       title: this.state.activeTitle,
       text: this.state.activeText,
-      index: this.state.notes.length
+      index: this.state.notes.length,
+      timestamp: this.nowTimeString()
     }
     this.setState(prevState => {
       return { notes: [...prevState.notes, note] };
@@ -49,11 +59,11 @@ class App extends Component {
   }
 
   editNote = () => {
-    console.log("editing note")
     let new_notes = this.state.notes;
 
     new_notes[this.state.editIndex].title = this.state.activeTitle;
     new_notes[this.state.editIndex].text = this.state.activeText;
+    new_notes[this.state.editIndex].timestamp = this.nowTimeString();
 
     this.setState({notes: new_notes});
     this.setState({editing: false})
