@@ -12,6 +12,7 @@ class NotesList extends Component {
                             <Card>
                                 <Card.Body>
                                     <Card.Title>{note.title}
+                                        <div id="buttons">
                                         <Button
                                             variant="light"
                                             onClick={() => this.props.setEditingNoteFunc(note.index)}>
@@ -22,6 +23,7 @@ class NotesList extends Component {
                                             onClick={() => this.props.deleteNoteFunc(note.index)}>
                                             Delete
                                         </Button>
+                                        </div>
                                     </Card.Title>
 
                                     <Card.Subtitle id="timestamp">{note.timestamp}</Card.Subtitle>

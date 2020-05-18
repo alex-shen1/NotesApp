@@ -13,7 +13,12 @@
 }
 
 #timestamp {
-  color:gray
+  color:gray;
+  text-align: right
+}
+
+#buttons {
+  text-align: right
 }
 
 
