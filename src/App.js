@@ -18,6 +18,7 @@ class App extends Component {
     };
   }
 
+  //Good use of arrow functions to avoid having to use bind this
   clearNote = () => {
     this.setState({ activeTitle: "" });
     this.setState({ activeText: "" });
@@ -44,6 +45,10 @@ class App extends Component {
   };
 
   setEditingNote = (index) => {
+    /*
+    You can group items in setState together to improve readability like:
+    this.setState({editing:true, editIndex: index, activeTitle:...})
+    */
     this.setState({ editing: true })
     this.setState({ editIndex: index })
     this.setState({ activeTitle: this.state.notes[index].title })
@@ -59,6 +64,8 @@ class App extends Component {
   }
 
   editNote = () => {
+    //instead of new notes, can you think of a better variable that gives an idea of what is / will be happening to
+    //this variable? something with editing, updating, etc.
     let new_notes = this.state.notes;
 
     new_notes[this.state.editIndex].title = this.state.activeTitle;
@@ -79,6 +86,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+      {/*Good use of components here to split logic*/}
         <WriteNotePanel
           addNoteFunc={this.addNote}
           setActiveTitleFunc={this.setActiveTitle}
