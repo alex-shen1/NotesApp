@@ -8,29 +8,36 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      notes: [{ title: "placeholder title", text: "placeholder text" }],
+      notes: [{ title: "placeholder title", text: "placeholder text", index: 0 }],
       activeTitle: "",
       activeText: "",
-      editing: false
+      editing: false,
+      editIndex: 0
     };
   }
 
+  clearNote = () => {
+    this.setState({ activeTitle: "" });
+    this.setState({ activeText: "" });
+  }
   addNote = () => {
     let note = {
       title: this.state.activeTitle,
-      text: this.state.activeText
+      text: this.state.activeText,
+      index: this.state.notes.length
     }
     this.setState(prevState => {
       return { notes: [...prevState.notes, note] };
     });
-    this.setState({ activeTitle: "" });
-    this.setState({ activeText: "" });
+    this.clearNote();
     this.setState({ editing: false });
   };
 
-  setEditingNote = (note) => {
+  setEditingNote = (index) => {
     this.setState({ editing: true })
-    console.log(note);
+    this.setState({ editIndex: index })
+    this.setState({ activeTitle: this.state.notes[index].title })
+    this.setState({ activeText: this.state.notes[index].text })
   }
 
   setActiveTitle = (event) => {
@@ -41,16 +48,32 @@ class App extends Component {
     this.setState({ activeText: event.target.value });
   }
 
+  editNote = () => {
+    console.log("editing note")
+    let new_notes = this.state.notes;
+
+    new_notes[this.state.editIndex].title = this.state.activeTitle;
+    new_notes[this.state.editIndex].text = this.state.activeText;
+
+    this.setState({notes: new_notes});
+    this.setState({editing: false})
+    this.clearNote();
+  }
+
   render() {
     return (
       <div className="App">
-        <WriteNotePanel addNoteFunc={this.addNote}
-          origNote={this.state.origNote}
+        <WriteNotePanel
+          addNoteFunc={this.addNote}
           setActiveTitleFunc={this.setActiveTitle}
           setActiveTextFunc={this.setActiveText}
           editing={this.state.editing}
+          activeTitle={this.state.activeTitle}
+          activeText={this.state.activeText}
+          editNoteFunc={this.editNote}
         />
-        <NotesList notes={this.state.notes} setEditingNoteFunc={this.setEditingNote}></NotesList>
+        <NotesList notes={this.state.notes}
+          setEditingNoteFunc={this.setEditingNote}></NotesList>
       </div>
     );
   }
