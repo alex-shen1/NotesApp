@@ -34,7 +34,7 @@ class WriteNotePanel extends Component {
 
     render() {
         return <div id="addNote">
-            <h1> {this.props.editing ? "Editing Note" : "Create Note"} </h1>
+            <h1> {this.props.editing ? "Edit Note" : "Create Note"} </h1>
             <Form>
                 <Form.Group>
                     <Form.Label>Title</Form.Label>
