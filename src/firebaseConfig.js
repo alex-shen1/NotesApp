@@ -1,8 +1,4 @@
-import firebase from "firebase";
-import "firebase/auth";
-import "firebase/firestore";
-
-export const firebaseConfig = {
+export const config = {
     apiKey: process.env.REACT_APP_FIREBASE_KEY,
     authDomain: "notes-b92de.firebaseapp.com",
     databaseURL: "https://notes-b92de.firebaseio.com",
@@ -13,11 +9,4 @@ export const firebaseConfig = {
     measurementId: "G-ED2QY807XE"
 };
 
-firebase.initializeApp(firebaseConfig)
-
-export const providers = {
-    googleProvider: new firebase.auth.GoogleAuthProvider()
-}
-
-export const firebaseAppAuth = firebase.auth();
-export default firebase;
+export default config;

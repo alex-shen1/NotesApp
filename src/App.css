@@ -13,7 +13,7 @@
 }
 
 #timestamp {
-  color:gray;
+  color: gray;
   text-align: right
 }
 
@@ -21,4 +21,15 @@
   text-align: right
 }
 
+.login {
+  /* background-color: pink; */
+  display:flex;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
 
+#userinfo {
+  color: gray;
+  height: 10px
+}

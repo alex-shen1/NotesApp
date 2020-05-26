@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
-class WriteNotePanel extends Component {
+export default class WriteNotePanel extends Component {
     constructor(props) {
         super(props);
 
@@ -45,5 +45,3 @@ class WriteNotePanel extends Component {
         </div>
     }
 }
-
-export default WriteNotePanel;
