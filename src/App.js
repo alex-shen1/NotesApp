@@ -27,10 +27,8 @@ class App extends Component {
       editing: false,
       editIndex: 0,
       activeUser: this.props.user != null ? this.props.user.email : "default",
-      firebase_ref: firebase.database().ref("default")
+      firebase_ref: "DNE" // if user is not logged in; will never save anything
     };
-    this.loadUserData();
-    // console.log(firebase)
   }
 
   clearNote = () => {
@@ -57,7 +55,9 @@ class App extends Component {
     });
     this.clearNote();
     this.setState({ editing: false });
+    if(this.state.firebase_ref != "DNE"){
     this.state.firebase_ref.set(updated_notes);
+    }
   };
 
   setEditingNote = (index) => {
@@ -84,28 +84,29 @@ class App extends Component {
     edited_notes[this.state.editIndex].text = this.state.activeText;
     edited_notes[this.state.editIndex].timestamp = this.nowTimeString();
 
-    this.setState({ notes: edited_notes });
-    this.setState({ editing: false })
+    this.setState({ notes: edited_notes, editing: false })
     this.clearNote();
 
+    if(this.state.firebase_ref != "DNE"){
     this.state.firebase_ref.set(edited_notes);
+    }
   }
 
   deleteNote = (del_index) => {
     let edited_notes = this.state.notes.filter(note => note.index != del_index);
-    // edited_notes.splice(del_index, 1)
     this.setState({ notes: edited_notes });
     console.log(del_index);
 
+    if(this.state.firebase_ref != "DNE"){
     this.state.firebase_ref.child(del_index).remove();
+    }
   }
 
   loadUserData = () => {
     if (this.props.user != null) {
-      console.log("user logged in")
       let uid = this.props.user.uid;
-      console.log("loading in data from " + uid);
-      firebase.database().ref(uid + "/email").set(this.props.user.email);
+      firebase.database().ref(uid + "/email").set(this.props.user.email); // stores email to make looking @ database easier
+
       let new_DB_ref = firebase.database().ref(uid + "/notes/");
       // need to create local var because accessing state to get the
       // DB reference might be too slow for loading in user notes
@@ -121,11 +122,6 @@ class App extends Component {
         }
       })
     }
-  }
-
-  test = () => {
-    console.log(this.state.activeUser);
-    console.log(this.props.user.email);
   }
 
   // loads in data automatically when opening app
@@ -153,6 +149,7 @@ class App extends Component {
     ],})
     this.clearNote();
   }
+
   render() {
     const {
       user,
@@ -162,14 +159,9 @@ class App extends Component {
 
     return (
       <div className="App">
-        {/* {console.log(this.props.user)} */}
-        {/* {this.loadUserData} */}
         <LoginScreen
           handleLogin={this.handleLogin}
           notLoggedIn={this.props.user == null} />
-        {/* <button onClick={signInWithGoogle}>login</button>
-        <button onClick={signOut}>sign out</button>
-        <button onClick={this.test}>print active user</button> */}
         <WriteNotePanel
           addNote={this.addNote}
           setActiveTitle={this.setActiveTitle}
@@ -198,8 +190,6 @@ class App extends Component {
     );
   }
 }
-
-// export default App;
 
 export default withFirebaseAuth({
   providers,

@@ -6,7 +6,7 @@ export default class LoginScreen extends Component {
     constructor(props){
         super(props);
         this.state = {
-            modalActive: false
+            modalActive: true
         }
     }
     handleClose = () => {
@@ -20,16 +20,15 @@ export default class LoginScreen extends Component {
 
     render() {
         return <div>
-            <Modal show={this.state.modalActive ? this.props.notLoggedIn : false}  onHide={this.handleClose}>
+            <Modal show={this.state.modalActive && this.props.notLoggedIn}  onHide={this.handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Login</Modal.Title>
+                    <Modal.Title>Log In</Modal.Title>
                 </Modal.Header>
-                <Modal.Body> <p>Logging in will let you save your notes inbetween sessions.</p>
-                <Button variant="success" onClick={this.handleLoginButton}>Log in with Google</Button>
-                </Modal.Body>
+                <Modal.Body> <p>Logging in will let you save your notes inbetween sessions. If you choose to not log in, you'lll still be able to write notes, but they won't be saved.</p></Modal.Body>
                 <Modal.Footer>
+                <Button variant="success" onClick={this.handleLoginButton}>Log in with Google</Button>
                     <Button variant="secondary" onClick={this.handleClose}>
-                        Close
+                        No thanks
                     </Button>
                 </Modal.Footer>
             </Modal>
