@@ -32,8 +32,7 @@ class App extends Component {
   }
 
   clearNote = () => {
-    this.setState({ activeTitle: "" });
-    this.setState({ activeText: "" });
+    this.setState({ activeTitle: "", activeText: "" });
   }
 
   nowTimeString = () => {
@@ -95,7 +94,6 @@ class App extends Component {
   deleteNote = (del_index) => {
     let edited_notes = this.state.notes.filter(note => note.index != del_index);
     this.setState({ notes: edited_notes });
-    console.log(del_index);
 
     if(this.state.firebase_ref != "DNE"){
     this.state.firebase_ref.child(del_index).remove();
