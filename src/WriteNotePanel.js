@@ -10,27 +10,7 @@ class WriteNotePanel extends Component {
             title: "",
             text: ""
         }
-
-        // this.changeTitle = this.changeTitle.bind(this);
-        // this.changeText = this.changeText.bind(this);
-        // this.createNote = this.createNote.bind(this);
     }
-
-    // changeTitle(event) {
-    //     this.setState({ title: event.target.value })
-    //     this.props.setActiveTitleFunc(event)
-    // }
-
-    // changeText(event) {
-    //     this.setState({ text: event.target.value })
-    //     this.props.setActiveTextFunc(event)
-    // }
-
-    // createNote(event) {
-    //     this.props.addNoteFunc(this.state.title, this.state.text);
-    //     this.setState({ title: "" });
-    //     this.setState({ text: "" });
-    // }
 
     render() {
         return <div id="addNote">
@@ -41,7 +21,7 @@ class WriteNotePanel extends Component {
                     <Form.Control
                         type="textarea"
                         placeholder="Title"
-                        onChange={this.props.setActiveTitleFunc}
+                        onChange={this.props.setActiveTitle}
                         value={this.props.activeTitle} />
                 </Form.Group>
                 <Form.Group>
@@ -50,14 +30,14 @@ class WriteNotePanel extends Component {
                         as="textarea"
                         rows="8"
                         placeholder="Text"
-                        onChange={this.props.setActiveTextFunc}
+                        onChange={this.props.setActiveText}
                         id="noteText"
                         value={this.props.activeText} />
                 </Form.Group>
 
                 <Button
                     variant={this.props.editing ? "success" : "primary"}
-                    onClick={this.props.editing ? (() => this.props.editNoteFunc()) : (() => this.props.addNoteFunc())}>
+                    onClick={this.props.editing ? (() => this.props.editNote()) : (() => this.props.addNote())}>
                     {this.props.editing ? "Edit Note" : "Create Note"}
                 </Button>
 
@@ -65,6 +45,5 @@ class WriteNotePanel extends Component {
         </div>
     }
 }
-
 
 export default WriteNotePanel;

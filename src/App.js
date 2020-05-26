@@ -9,7 +9,7 @@ class App extends Component {
     super(props);
     this.state = {
       notes: [
-        { title: "Example Title", text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", index: 0, timestamp: this.nowTimeString()}
+        { title: "Example Title", text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", index: 0, timestamp: this.nowTimeString() }
       ],
       activeTitle: "",
       activeText: "",
@@ -18,7 +18,6 @@ class App extends Component {
     };
   }
 
-  //Good use of arrow functions to avoid having to use bind this
   clearNote = () => {
     this.setState({ activeTitle: "" });
     this.setState({ activeText: "" });
@@ -28,7 +27,7 @@ class App extends Component {
     let now = new Date();
 
     return ("Last edited " + now.getHours() + ":" + now.getMinutes() + " on " +
-    (now.getMonth()+1) + "/" + now.getDate() + "/" + now.getFullYear())
+      (now.getMonth() + 1) + "/" + now.getDate() + "/" + now.getFullYear())
   }
   addNote = () => {
     let note = {
@@ -45,14 +44,12 @@ class App extends Component {
   };
 
   setEditingNote = (index) => {
-    /*
-    You can group items in setState together to improve readability like:
-    this.setState({editing:true, editIndex: index, activeTitle:...})
-    */
-    this.setState({ editing: true })
-    this.setState({ editIndex: index })
-    this.setState({ activeTitle: this.state.notes[index].title })
-    this.setState({ activeText: this.state.notes[index].text })
+    this.setState({
+      editing: true,
+      editIndex: index,
+      activeTitle: this.state.notes[index].title,
+      activeText: this.state.notes[index].text
+    })
   }
 
   setActiveTitle = (event) => {
@@ -64,42 +61,39 @@ class App extends Component {
   }
 
   editNote = () => {
-    //instead of new notes, can you think of a better variable that gives an idea of what is / will be happening to
-    //this variable? something with editing, updating, etc.
-    let new_notes = this.state.notes;
+    let edited_notes = this.state.notes;
 
-    new_notes[this.state.editIndex].title = this.state.activeTitle;
-    new_notes[this.state.editIndex].text = this.state.activeText;
-    new_notes[this.state.editIndex].timestamp = this.nowTimeString();
+    edited_notes[this.state.editIndex].title = this.state.activeTitle;
+    edited_notes[this.state.editIndex].text = this.state.activeText;
+    edited_notes[this.state.editIndex].timestamp = this.nowTimeString();
 
-    this.setState({notes: new_notes});
-    this.setState({editing: false})
+    this.setState({ notes: edited_notes });
+    this.setState({ editing: false })
     this.clearNote();
   }
 
   deleteNote = (del_index) => {
-    let new_notes = this.state.notes; 
-    new_notes.splice(del_index, 1)
-    this.setState({notes: new_notes});
+    let edited_notes = this.state.notes;
+    edited_notes.splice(del_index, 1)
+    this.setState({ notes: edited_notes });
   }
 
   render() {
     return (
       <div className="App">
-      {/*Good use of components here to split logic*/}
         <WriteNotePanel
-          addNoteFunc={this.addNote}
-          setActiveTitleFunc={this.setActiveTitle}
-          setActiveTextFunc={this.setActiveText}
+          addNote={this.addNote}
+          setActiveTitle={this.setActiveTitle}
+          setActiveText={this.setActiveText}
           editing={this.state.editing}
           activeTitle={this.state.activeTitle}
           activeText={this.state.activeText}
-          editNoteFunc={this.editNote}
+          editNote={this.editNote}
         />
-        <NotesList 
+        <NotesList
           notes={this.state.notes}
-          setEditingNoteFunc={this.setEditingNote} 
-          deleteNoteFunc={this.deleteNote} />
+          setEditingNote={this.setEditingNote}
+          deleteNote={this.deleteNote} />
       </div>
     );
   }
