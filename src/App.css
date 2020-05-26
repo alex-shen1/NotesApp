@@ -31,5 +31,8 @@
 
 #userinfo {
   color: gray;
-  height: 10px
+  height: 10px; 
+  position: absolute;
+  left: 10px;
+  bottom: 0;
 }

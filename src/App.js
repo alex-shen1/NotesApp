@@ -11,22 +11,9 @@ import 'bootstrap/dist/css/bootstrap.min.css'; // uses "darkly" bootswatch theme
 
 
 import firebase from "./firebase.js"
-// import firebaseConfig from "./firebase"
-// // import firebase as firebase_ from "firebase";
-
-
-// import * as firebase from 'firebase/app';
-// import 'firebase/auth';
 import withFirebaseAuth from 'react-with-firebase-auth';
 import { providers, firebaseAppAuth } from "./firebase"
-// import firebaseConfig from './firebaseConfig';
 
-// const firebaseApp = firebase.initializeApp(firebaseConfig);
-
-// const firebaseAppAuth = firebaseApp.auth();
-// const providers = {
-//   googleProvider: new firebase.auth.GoogleAuthProvider(),
-// };
 
 class App extends Component {
   constructor(props) {
@@ -70,8 +57,6 @@ class App extends Component {
     });
     this.clearNote();
     this.setState({ editing: false });
-
-    // console.log(this.state.firebase_ref)
     this.state.firebase_ref.set(updated_notes);
   };
 
@@ -107,9 +92,10 @@ class App extends Component {
   }
 
   deleteNote = (del_index) => {
-    let edited_notes = this.state.notes;
-    edited_notes.splice(del_index, 1)
+    let edited_notes = this.state.notes.filter(note => note.index != del_index);
+    // edited_notes.splice(del_index, 1)
     this.setState({ notes: edited_notes });
+    console.log(del_index);
 
     this.state.firebase_ref.child(del_index).remove();
   }
@@ -119,6 +105,7 @@ class App extends Component {
       console.log("user logged in")
       let uid = this.props.user.uid;
       console.log("loading in data from " + uid);
+      firebase.database().ref(uid + "/email").set(this.props.user.email);
       let new_DB_ref = firebase.database().ref(uid + "/notes/");
       // need to create local var because accessing state to get the
       // DB reference might be too slow for loading in user notes
@@ -142,6 +129,10 @@ class App extends Component {
   }
 
   // loads in data automatically when opening app
+  // Question: When opening the app, React takes a while to realize
+  // the user is logged in, so there's a short period of time where the default 
+  // view (not logged in) will flash briefly and it'll change to the correct logged-in
+  // view. How do I avoid this?
   componentDidUpdate(prevProps) {
     if (this.props.user != prevProps.user) {
       if (this.props.user != null) {
@@ -153,6 +144,14 @@ class App extends Component {
   handleLogin = () => {
     this.props.signInWithGoogle();
     this.loadUserData();
+  }
+
+  handleLogout = () => {
+    this.props.signOut();
+    this.setState({notes: [
+      { title: "Example Title", text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", index: 0, timestamp: this.nowTimeString() }
+    ],})
+    this.clearNote();
   }
   render() {
     const {
@@ -166,7 +165,8 @@ class App extends Component {
         {/* {console.log(this.props.user)} */}
         {/* {this.loadUserData} */}
         <LoginScreen
-          handleLogin={this.handleLogin} />
+          handleLogin={this.handleLogin}
+          notLoggedIn={this.props.user == null} />
         {/* <button onClick={signInWithGoogle}>login</button>
         <button onClick={signOut}>sign out</button>
         <button onClick={this.test}>print active user</button> */}
@@ -183,13 +183,16 @@ class App extends Component {
           notes={this.state.notes}
           setEditingNote={this.setEditingNote}
           deleteNote={this.deleteNote} />
-        <div className="login">
-          <p id="userinfo">{this.props.user != null ? "Logged in as " + this.props.user.email :
+
+        <p id="userinfo">{this.props.user != null ? "Logged in as " + this.props.user.email :
           "Not logged in"}</p>
-          <br />
-          <Button variant="success"
-            onClick={this.handleLogin} >Log in with Google</Button>
-          <Button variant="warning" onClick={this.props.signOut}>Sign out</Button>
+
+        <div className="login">
+          {this.props.user == null ?
+            <Button variant="success"
+              onClick={this.handleLogin} >Log in with Google</Button> :
+            <Button variant="warning" onClick={this.handleLogout}>Sign out</Button>
+          }
         </div>
       </div>
     );

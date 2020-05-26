@@ -6,7 +6,7 @@ export default class LoginScreen extends Component {
     constructor(props){
         super(props);
         this.state = {
-            modalActive: true
+            modalActive: false
         }
     }
     handleClose = () => {
@@ -20,7 +20,7 @@ export default class LoginScreen extends Component {
 
     render() {
         return <div>
-            <Modal show={this.state.modalActive} onHide={this.handleClose}>
+            <Modal show={this.state.modalActive ? this.props.notLoggedIn : false}  onHide={this.handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Login</Modal.Title>
                 </Modal.Header>
